@@ -65,9 +65,6 @@ const Shop = () => {
                 }
             </div>
             <div className="cart">
-                {/* bellow two line move in Cart.jsx */}
-                {/* <h4>Order Summery</h4>
-                <p>Selected Items: {cart.length}</p> */}
                 <Cart cart={cart}></Cart>
             </div>
         </div>
