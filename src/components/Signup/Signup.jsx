@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider';
 
 const Signup = () => {
+
+    const { createUser } = useContext(AuthContext);
+    // console.log(createUser);
 
     const handelSignup = event => {
         event.preventDefault();
@@ -10,7 +14,14 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, email, password);
-        form.reset();
+
+        createUser(email, password)
+            .then(result => {
+                const newUser = result.user;
+                console.log(newUser);
+                form.reset();
+            })
+            .catch(err => console.log(err.message))
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -24,12 +35,12 @@ const Signup = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="name" className="input input-bordered" required/>
+                            <input type="text" name="name" placeholder="name" className="input input-bordered" required />
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name="email" placeholder="email" className="input input-bordered" required/>
-                        
+                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>

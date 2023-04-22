@@ -4,7 +4,9 @@ import { AuthContext } from '../AuthProvider';
 
 const Inventory = () => {
 
-    const {user} = useContext(AuthContext)
+    const {user} = useContext(AuthContext);
+    console.log(user);
+    
     return (
         <div>   
             <h2>inventory</h2>
