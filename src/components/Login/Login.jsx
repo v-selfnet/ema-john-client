@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 
@@ -8,6 +8,9 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
+
+    // show password 
+    const [show, setShow] = useState(false)
 
     const from = location.state?.from?.pathname || '/';
 
@@ -26,7 +29,7 @@ const Login = () => {
 
                 // after login go to current location
                 // navigate('/');
-                navigate(from, {replace:true});
+                navigate(from, { replace: true });
             })
             .catch(err => console.error(err.message))
     }
@@ -48,7 +51,16 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                            <input type={show ? "text" : "password"} name="password" placeholder="password" className="input input-bordered" required />
+
+                            {/* show password */}
+                            <p onClick={() => setShow(!show)}><small>
+                                {
+                                    show ? <button className='btn btn-xs'>Show</button> : <button className='btn btn-xs'>Hide</button>
+                                }
+                            </small></p>
+                                
+
                             <label className="label">
                                 <Link to="/signup" className="label-text-alt link link-hover">Don't have an account?</Link>
                             </label>
