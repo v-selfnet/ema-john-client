@@ -12,6 +12,7 @@ import Login from './components/Login/Login'
 import cartProductsLoader from './loaders/cartProductsLoader'
 import Signup from './components/Signup/Signup'
 import AuthProvider from './components/AuthProvider'
+import PrivateRoute from './components/PrivateRoute'
 
 const router = createBrowserRouter([
   {
@@ -24,13 +25,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/orders',
-        element: <Orders></Orders>,
+        element: <PrivateRoute><Orders></Orders></PrivateRoute>,
         // loader: () => fetch('products.json');
         loader: cartProductsLoader // this user define datta loader function [custom hook]
       },
       {
         path: '/inventory',
-        element: <Inventory></Inventory>
+        element: <PrivateRoute><Inventory></Inventory></PrivateRoute>
       },
       {
         path: '/login',
